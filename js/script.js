@@ -80,11 +80,19 @@ const searchFunction = (list) => {
   //Empty array to store search result.
   const results = [];
 
-  /*Compare search input to listName and append match to results array
+  /*Compare search input to listFirstName or listLastName and append match to results array
   also call function to display search result*/
   for (let i = 0; i < list.length; i++) {
-    const listName = Object.values(list[i].name).join(" ").toLowerCase();
-    if (searchInput !== 0 && listName.includes(searchInput)) {
+    const listFirstName = Object.values(list[i].name.first)
+      .join("")
+      .toLowerCase();
+    const listLastName = Object.values(list[i].name.last)
+      .join("")
+      .toLowerCase();
+    if (
+      (searchInput !== 0 && listFirstName.includes(searchInput)) ||
+      listLastName.includes(searchInput)
+    ) {
       results.push(list[i]);
       studentsList.textContent = "";
       showPage(results, 1);
