@@ -1,3 +1,5 @@
+/*Page Layout function output a maximum of 9 student
+& insert HTML layout inside the ul */
 const showPage = (list, page) => {
   const startIndex = page * 9 - 9;
   const endIndex = page * 9;
@@ -23,16 +25,13 @@ const showPage = (list, page) => {
   }
 };
 
-//import student info to create file
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+//creation of Pagination function
 const addPagination = (list) => {
   const pageNeeded = Math.ceil(list.length / 9);
   const ulLink_List = document.querySelector(".link-list");
   ulLink_List.innerHTML = "";
 
+  //creation of amount of page buttons required.
   for (let i = 0; i < pageNeeded; i++) {
     ulLink_List.insertAdjacentHTML(
       "beforeend",
@@ -42,8 +41,11 @@ const addPagination = (list) => {
    `
     );
   }
-  const firstButton = ulLink_List.querySelector("button");
+  const firstButton = document.querySelector(".link-list button");
   firstButton.className = "active";
+
+  /*Eventlistener for Pagination button 
+    also transfer active button className*/
   ulLink_List.addEventListener("click", (e) => {
     const selectedPage = e.target;
 
@@ -56,8 +58,8 @@ const addPagination = (list) => {
   });
 };
 
+//create search field format
 const header = document.querySelector(".header");
-
 header.insertAdjacentHTML(
   "beforeend",
   `<label for="search" class = 'student-search'>
@@ -68,14 +70,17 @@ header.insertAdjacentHTML(
 `
 );
 
-const searchEngine = document.querySelector(".student-search");
-
+//creation of the search function.
 const searchFunction = (list) => {
   const studentsList = document.querySelector(".student-list");
   const searchInput = document
     .querySelector(".student-search input")
     .value.toLowerCase();
+  //Empty array to store search result.
   const results = [];
+
+  /*Compare search input to listName and append match to results array
+  also call function to display search result*/
   for (let i = 0; i < list.length; i++) {
     const listName = Object.values(list[i].name).join(" ").toLowerCase();
     if (searchInput !== 0 && listName.includes(searchInput)) {
@@ -84,17 +89,22 @@ const searchFunction = (list) => {
       showPage(results, 1);
       addPagination(results);
     }
-    if (results == 0) {
-      studentsList.textContent = `No results found`;
-      addPagination(results);
-    }
+  } //Return No result & adjust pagination.
+  if (results == 0) {
+    studentsList.textContent = `No results found`;
+    addPagination(results);
   }
 };
-searchEngine.addEventListener("click", (e) => {
+
+//EventListener for the search button
+const searchButton = document.querySelector(".student-search button");
+searchButton.addEventListener("click", (e) => {
   e.preventDefault();
   searchFunction(data);
 });
 
+//improve live search with a keyup listener on the input field
+const searchEngine = document.querySelector("#search");
 searchEngine.addEventListener("keyup", () => {
   searchFunction(data);
 });
