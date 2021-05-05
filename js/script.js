@@ -3,11 +3,11 @@
 const showPage = (list, page) => {
   const startIndex = page * 9 - 9;
   const endIndex = page * 9;
-  const ul = document.querySelector("ul.student-list");
-  ul.innerHTML = "";
+  const ulStudent_List = document.querySelector("ul.student-list");
+  ulStudent_List.innerHTML = "";
   for (let i = 0; i < list.length; i++) {
     if (i >= startIndex && i < endIndex) {
-      ul.insertAdjacentHTML(
+      ulStudent_List.insertAdjacentHTML(
         "beforeend",
         `<li class="student-item cf">
          <div class = "student-details">
