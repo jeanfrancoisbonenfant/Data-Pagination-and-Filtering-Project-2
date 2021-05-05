@@ -1,6 +1,6 @@
 # Data Pagination and Filtering - Project 2
 
-Unit 2 Project for Treehouse Full stack Javascript techdegree
+Project for Treehouse Full stack Javascript techdegree
 
 Data Pagination and Filtering
 
