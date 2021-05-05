@@ -42,8 +42,9 @@ const addPagination = (list) => {
     );
   }
   const firstButton = document.querySelector(".link-list button");
-  firstButton.className = "active";
-
+  if (firstButton) {
+    firstButton.className = "active";
+  }
   /*Eventlistener for Pagination button 
     also transfer active button className*/
   ulLink_List.addEventListener("click", (e) => {
@@ -53,7 +54,7 @@ const addPagination = (list) => {
       const previousPage = document.querySelector(".active");
       previousPage.className = "";
       selectedPage.className = "active";
-      showPage(data, selectedPage.textContent);
+      showPage(list, selectedPage.textContent);
     }
   });
 };
